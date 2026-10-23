@@ -58,7 +58,7 @@ server's dispatch contract. Command registration lands with the server
 bot-model work, [Aktiga/klank PR #6](https://github.com/Aktiga/klank/pull/6)
 (`feat/bot-model`); on a server without it there is no route to point a command
 at this endpoint. Details in
-[server-requirements.md](https://github.com/Aktiga/klank-sdk/blob/main/docs/server-requirements.md).
+[server-requirements.md](https://github.com/Bash-Squad/klank-sdk/blob/main/docs/server-requirements.md).
 
 ## Point a command at this receiver
 

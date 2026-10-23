@@ -61,11 +61,11 @@
     "e2ee"
   ],
   "license": "MIT",
-  "homepage": "https://github.com/Aktiga/klank-sdk/tree/main/packages/sdk#readme",
-  "bugs": "https://github.com/Aktiga/klank-sdk/issues",
+  "homepage": "https://github.com/Bash-Squad/klank-sdk/tree/main/packages/sdk#readme",
+  "bugs": "https://github.com/Bash-Squad/klank-sdk/issues",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Aktiga/klank-sdk.git",
+    "url": "git+https://github.com/Bash-Squad/klank-sdk.git",
     "directory": "packages/sdk"
   }
 }

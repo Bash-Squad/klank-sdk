@@ -3,7 +3,7 @@ name: Release
 # Changesets flow:
 #   1. A PR merges to main carrying .changeset/*.md files.
 #   2. This job pushes the `changeset-release/main` branch and tries to open the
-#      "Version Packages" PR. The Aktiga org forbids Actions from creating PRs, so
+#      "Version Packages" PR. This repo's Actions may not create PRs, so
 #      that step fails; open the PR by hand: `gh pr create --head changeset-release/main`.
 #   3. Merging that PR re-runs this job, which publishes to npm.
 #
@@ -34,7 +34,7 @@ jobs:
   release:
     name: version or publish
     runs-on: ubuntu-latest
-    if: github.repository == 'Aktiga/klank-sdk'
+    if: github.repository == 'Bash-Squad/klank-sdk'
     steps:
       - uses: actions/checkout@v4
         with:

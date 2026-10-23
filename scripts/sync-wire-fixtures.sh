@@ -11,7 +11,7 @@
 # a ref with only the former has no `command.invoked` sample, and the gate then
 # reports it as an event the SDK models and the server no longer sends.
 #
-# Needs `gh` authenticated against a token with read access to Aktiga/klank.
+# Needs `gh` authenticated against a token with read access to Bash-Squad/klank.
 set -euo pipefail
 
 ref="${1:-main}"
@@ -23,8 +23,8 @@ dest="$repo_root/packages/sdk/fixtures/wire/server-events.json"
 tmp="$(mktemp)"
 trap 'rm -f "$tmp"' EXIT
 
-gh api "repos/Aktiga/klank/contents/fixtures/wire/server-events.json?ref=${ref}" \
+gh api "repos/Bash-Squad/klank/contents/fixtures/wire/server-events.json?ref=${ref}" \
   -H "Accept: application/vnd.github.raw" >"$tmp"
 mv "$tmp" "$dest"
 
-echo "synced $dest from Aktiga/klank@${ref}"
+echo "synced $dest from Bash-Squad/klank@${ref}"

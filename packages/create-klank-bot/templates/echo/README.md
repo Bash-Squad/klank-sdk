@@ -12,7 +12,7 @@ Against Klank `53d464a` (2026-04-30) this bot connects but receives nothing:
 the server accepts bot tokens on two routes and has no channel-membership
 model for bots, so most of the interactive surface cannot do anything yet.
 Details in
-[server-requirements.md](https://github.com/Aktiga/klank-sdk/blob/main/docs/server-requirements.md).
+[server-requirements.md](https://github.com/Bash-Squad/klank-sdk/blob/main/docs/server-requirements.md).
 
 Running it needs a server with the bot-model work: bot channel membership
 (so events arrive and `ctx.say` is allowed) and bot tokens accepted on the

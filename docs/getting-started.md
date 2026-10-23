@@ -4,7 +4,7 @@ Post your first message into Klank from Node.
 
 ## Prerequisites
 
-- A running [Klank](https://github.com/Aktiga/klank) server. Examples below use `http://localhost:3000`.
+- A running [Klank](https://github.com/Bash-Squad/klank) server. Examples below use `http://localhost:3000`.
 - Node 20+ and a user account with workspace `owner` or `admin` role — bot and webhook creation both require it.
 
 ## 1. Get a user token

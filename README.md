@@ -1,6 +1,6 @@
 # Klank SDK
 
-Client SDKs for [Klank](https://github.com/Aktiga/klank), the self-hosted end-to-end-encrypted team chat. This is the SDK monorepo; the server lives in its own repository.
+Client SDKs for [Klank](https://github.com/Bash-Squad/klank), the self-hosted end-to-end-encrypted team chat. This is the SDK monorepo; the server lives in its own repository.
 
 ## Packages
 
@@ -35,7 +35,7 @@ npm create klank-bot@latest my-bot    # --template echo | webhook-poster | slash
 
 ## Running Klank
 
-Klank is open source: run the server yourself from [Aktiga/klank](https://github.com/Aktiga/klank), or have Aktiga host it for you.
+Klank is open source: run the server yourself from [Bash-Squad/klank](https://github.com/Bash-Squad/klank).
 
 ## Development
 

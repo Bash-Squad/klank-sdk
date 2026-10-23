@@ -1,6 +1,6 @@
 # create-klank-bot
 
-Scaffold a [Klank](https://github.com/Aktiga/klank) bot project.
+Scaffold a [Klank](https://github.com/Bash-Squad/klank) bot project.
 
 ```bash
 npm create klank-bot@latest my-bot

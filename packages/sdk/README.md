@@ -1,6 +1,6 @@
 # @klank/sdk
 
-Bot SDK for [Klank](https://github.com/Aktiga/klank), the self-hosted end-to-end-encrypted team chat. Typed wire models, an incoming-webhook poster, slash command signature verification, a REST client, and a WebSocket event bot. The wire formats mirror the server source; what the server does not yet do for bots is marked pending below rather than papered over.
+Bot SDK for [Klank](https://github.com/Bash-Squad/klank), the self-hosted end-to-end-encrypted team chat. Typed wire models, an incoming-webhook poster, slash command signature verification, a REST client, and a WebSocket event bot. The wire formats mirror the server source; what the server does not yet do for bots is marked pending below rather than papered over.
 
 ## Install
 
@@ -12,17 +12,17 @@ Node 20+. ESM only (`import`, no `require`). No runtime dependencies beyond `ws`
 
 ## Status
 
-Against Klank `53d464a` (2026-04-30). The server accepts bot tokens on two routes — and one of those two, the WebSocket ticket, still fails on a foreign key — and it has no channel-membership model for bots, so most of the interactive surface cannot do anything yet. The server bot-model work, [Aktiga/klank PR #6](https://github.com/Aktiga/klank/pull/6) (`feat/bot-model`), closes every row marked pending below. Details in [server-requirements.md](https://github.com/Aktiga/klank-sdk/blob/main/docs/server-requirements.md).
+Against Klank `53d464a` (2026-04-30). The server accepts bot tokens on two routes — and one of those two, the WebSocket ticket, still fails on a foreign key — and it has no channel-membership model for bots, so most of the interactive surface cannot do anything yet. The server bot-model work, [Aktiga/klank PR #6](https://github.com/Aktiga/klank/pull/6) (`feat/bot-model`), closes every row marked pending below. Details in [server-requirements.md](https://github.com/Bash-Squad/klank-sdk/blob/main/docs/server-requirements.md).
 
 | Surface | Status |
 |---|---|
 | `WebhookBot.send` | Works. Non-E2EE channels only; a channel with an active key epoch rejects with `E2EEChannelError`. |
 | `verifySlashCommandSignature`, `parseSlashCommandPayload` | Works. They implement the server's dispatch contract; on `53d464a` nothing calls it (no command registration route), the bot-model branch adds `POST /workspaces/{wid}/slash-commands` and the invoke route. |
 | `KlankClient.getBotInfo` | Works. |
-| `KlankClient.getWsTicket` | **Pending server** on `53d464a` (ticket insert violates a `users` FK); fixed on the bot-model branch. [Details](https://github.com/Aktiga/klank-sdk/blob/main/docs/server-requirements.md#2-bots-have-no-channel-membership-so-they-receive-zero-websocket-events-and-cannot-pass-is_member) |
-| `KlankClient` channel / message / reaction methods | **Pending server.** Bot tokens are not yet accepted on those routes (401); the bot-model branch accepts them. [Details](https://github.com/Aktiga/klank-sdk/blob/main/docs/server-requirements.md#1-bot-tokens-are-rejected-by-every-channelmessagereaction-route) |
-| `KlankBot` events and `ctx` helpers | **Pending server.** The socket connects; bots have no channel subscriptions, so no events arrive. The bot-model branch adds `bot_channel_members`, so a bot added to a channel receives that channel's events. [Details](https://github.com/Aktiga/klank-sdk/blob/main/docs/server-requirements.md#2-bots-have-no-channel-membership-so-they-receive-zero-websocket-events-and-cannot-pass-is_member) |
-| `bot.command()` | **Pending server.** `command.invoked` is not emitted over the WebSocket. Use the HTTP slash recipe below. The bot-model branch registers slash commands and delivers them to the owning bot. [Details](https://github.com/Aktiga/klank-sdk/blob/main/docs/server-requirements.md#3-no-slash-command-delivery-path) |
+| `KlankClient.getWsTicket` | **Pending server** on `53d464a` (ticket insert violates a `users` FK); fixed on the bot-model branch. [Details](https://github.com/Bash-Squad/klank-sdk/blob/main/docs/server-requirements.md#2-bots-have-no-channel-membership-so-they-receive-zero-websocket-events-and-cannot-pass-is_member) |
+| `KlankClient` channel / message / reaction methods | **Pending server.** Bot tokens are not yet accepted on those routes (401); the bot-model branch accepts them. [Details](https://github.com/Bash-Squad/klank-sdk/blob/main/docs/server-requirements.md#1-bot-tokens-are-rejected-by-every-channelmessagereaction-route) |
+| `KlankBot` events and `ctx` helpers | **Pending server.** The socket connects; bots have no channel subscriptions, so no events arrive. The bot-model branch adds `bot_channel_members`, so a bot added to a channel receives that channel's events. [Details](https://github.com/Bash-Squad/klank-sdk/blob/main/docs/server-requirements.md#2-bots-have-no-channel-membership-so-they-receive-zero-websocket-events-and-cannot-pass-is_member) |
+| `bot.command()` | **Pending server.** `command.invoked` is not emitted over the WebSocket. Use the HTTP slash recipe below. The bot-model branch registers slash commands and delivers them to the owning bot. [Details](https://github.com/Bash-Squad/klank-sdk/blob/main/docs/server-requirements.md#3-no-slash-command-delivery-path) |
 
 ## Quick start
 
@@ -333,7 +333,7 @@ Every channel, message, and reaction route requires the caller to be a channel m
 
 ## Security
 
-See [docs/security.md](https://github.com/Aktiga/klank-sdk/blob/main/docs/security.md): HMAC details for both directions, the absence of replay protection, and what the SDK never logs.
+See [docs/security.md](https://github.com/Bash-Squad/klank-sdk/blob/main/docs/security.md): HMAC details for both directions, the absence of replay protection, and what the SDK never logs.
 
 ## Server compatibility
 

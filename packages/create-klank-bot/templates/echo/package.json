@@ -4,7 +4,7 @@
   "private": true,
   "type": "module",
   "engines": {
-    "node": ">=20"
+    "node": ">=22"
   },
   "scripts": {
     "start": "tsx src/index.ts",
@@ -15,7 +15,7 @@
     "@klank/sdk": "^0.3.0"
   },
   "devDependencies": {
-    "@types/node": "^20",
+    "@types/node": "^22",
     "tsx": "^4.19.0",
     "typescript": "^5.6.0",
     "vitest": "^3.2.4"

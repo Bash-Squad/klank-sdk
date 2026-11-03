@@ -174,7 +174,7 @@ export interface SlashCommandResponse {
 }
 
 // ── WebSocket events (server → client) ──
-// One interface per `ServerEvent` variant in crates/rs-realtime/src/events.rs.
+// Server enum variants plus connection-local frames written by the socket task.
 
 export interface MessageNewEvent {
   type: 'message.new'
@@ -207,6 +207,13 @@ export interface MessageUpdatedEvent {
 
 export interface MessageDeletedEvent {
   type: 'message.deleted'
+  channel_id: string
+  message_id: string
+}
+
+/** Non-thumbnail attachment persisted; channel members should re-read the message's files. */
+export interface MessageFilesUpdatedEvent {
+  type: 'message.files_updated'
   channel_id: string
   message_id: string
 }
@@ -416,6 +423,11 @@ export interface EventsMissedEvent {
   count: number
 }
 
+/** Application-level ping reply sent only to the originating socket. */
+export interface PongEvent {
+  type: 'pong'
+}
+
 /**
  * Slash command delivered over the WebSocket to the bot that owns it
  * (`bot_id`). Emitted by Klank servers with the bot-model work; older
@@ -435,6 +447,7 @@ export type ServerEvent =
   | MessageNewEvent
   | MessageUpdatedEvent
   | MessageDeletedEvent
+  | MessageFilesUpdatedEvent
   | ReactionAddedEvent
   | ReactionRemovedEvent
   | TypingStartEvent
@@ -465,6 +478,7 @@ export type ServerEvent =
   | HuddleParticipantLeftEvent
   | HuddleEndedEvent
   | EventsMissedEvent
+  | PongEvent
   | CommandInvokedEvent
 
 export type ServerEventType = ServerEvent['type']

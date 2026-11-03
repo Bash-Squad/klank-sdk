@@ -131,6 +131,11 @@
     "message_id": "00000000-0000-0000-0000-000000000002",
     "type": "message.deleted"
   },
+  "message.files_updated": {
+    "channel_id": "00000000-0000-0000-0000-000000000001",
+    "message_id": "00000000-0000-0000-0000-000000000002",
+    "type": "message.files_updated"
+  },
   "message.new": {
     "channel_id": "00000000-0000-0000-0000-000000000001",
     "ciphertext": [
@@ -172,6 +177,9 @@
     ],
     "plaintext": "plaintext",
     "type": "message.updated"
+  },
+  "pong": {
+    "type": "pong"
   },
   "presence.update": {
     "status": "online",

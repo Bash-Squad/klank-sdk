@@ -300,11 +300,11 @@ try {
 
 ## Events
 
-Every frame is JSON text `{ "type": "<name>", ...fields }`. Field names are snake_case and match the server's `ServerEvent` enum. All `type` values in the `ServerEvent` union:
+Every frame is JSON text `{ "type": "<name>", ...fields }`. Field names are snake_case and match the server's events, including connection-local frames outside its `ServerEvent` enum. All `type` values in the SDK's `ServerEvent` union:
 
 | Group | `type` |
 |---|---|
-| Messages | `message.new`, `message.updated`, `message.deleted` |
+| Messages | `message.new`, `message.updated`, `message.deleted`, `message.files_updated` |
 | Reactions | `reaction.added`, `reaction.removed` |
 | Typing | `typing.start`, `typing.stop` (server emits `typing.stop` 5 s after the last typing signal) |
 | Channels | `channel.created`, `channel.deleted`, `channel.member_joined`, `channel.member_left`, `channel.member_added` |
@@ -316,8 +316,15 @@ Every frame is JSON text `{ "type": "<name>", ...fields }`. Field names are snak
 | Import | `import.progress` |
 | Huddles | `huddle.started`, `huddle.participant_joined`, `huddle.participant_left`, `huddle.ended` |
 | Sentinels | `events.missed` (`{ count }`: this socket fell behind the broadcast; treat cached state as stale and re-fetch over REST), `command.invoked` (emitted to the owning bot; see `bot.command()`) |
+| Connection | `pong` (application-level reply to `{"type":"ping"}`, sent only to the originating socket) |
 
 `message.new` carries `plaintext` for bot and plaintext messages and `ciphertext`/`nonce`/`key_epoch` for E2EE messages, which a bot cannot decrypt. Use `EventOf<'message.new'>` (or the named interfaces such as `MessageNewEvent`) to type handlers outside `bot.on`.
+
+The attachment-completion wire contract adds `MessageFilesUpdatedEvent` (`message.files_updated`, `{ channel_id, message_id }`) and `PongEvent` (`pong`, no additional fields). These are additive SDK types; older servers may not emit them, and their inclusion here does not imply a server release.
+
+`message.files_updated` is emitted only after a non-thumbnail attachment has been persisted and is scoped to channel membership. It is a signal to re-read the message's attachments, not an attachment payload or a guarantee that every file in a multi-file upload has finished. Register with `bot.on('message.files_updated', handler)`; the handler receives typed `channel_id` and `message_id`.
+
+Register `bot.on('pong', handler)` for the connection-local application reply. It has no channel or message context, so `ctx.say`, `ctx.reply`, `ctx.react`, and `ctx.unreact` throw `ContextError`. This JSON event is distinct from the WebSocket protocol pong used by the SDK's existing heartbeat timeout.
 
 ## Bot messages and E2EE
 
@@ -337,7 +344,7 @@ See [docs/security.md](https://github.com/Bash-Squad/klank-sdk/blob/main/docs/se
 
 ## Server compatibility
 
-Wire types and routes are verified against [Aktiga/klank](https://github.com/Aktiga/klank) commit `53d464a` (2026-04-30).
+The baseline route contract was originally verified against [Bash-Squad/klank](https://github.com/Bash-Squad/klank) commit `53d464a` (2026-04-30). The additive attachment/pong fixture and real two-consumer round-trip are verified against the server hardening candidate [`cb131ab`](https://github.com/Bash-Squad/klank/commit/cb131ab) (2026-11-02); this is not a server-release claim.
 
 ## License
 

@@ -344,7 +344,7 @@ See [docs/security.md](https://github.com/Bash-Squad/klank-sdk/blob/main/docs/se
 
 ## Server compatibility
 
-Wire types and routes are verified against [Aktiga/klank](https://github.com/Aktiga/klank) commit `53d464a` (2026-04-30).
+The baseline route contract was originally verified against [Bash-Squad/klank](https://github.com/Bash-Squad/klank) commit `53d464a` (2026-04-30). The additive attachment/pong fixture and real two-consumer round-trip are verified against the server hardening candidate [`cb131ab`](https://github.com/Bash-Squad/klank/commit/cb131ab) (2026-11-02); this is not a server-release claim.
 
 ## License
 
